@@ -1,0 +1,98 @@
+-- return {
+--   {
+--     "akinsho/toggleterm.nvim",
+--     version = "*",
+--     keys = { [[<C-/>]], [[<C-_>]] },
+--     opts = {
+--       size = function(term)
+--         if term.direction == "horizontal" then
+--           return math.floor(vim.o.lines * 0.3)
+--         elseif term.direction == "vertical" then
+--           return math.floor(vim.o.columns * 0.4)
+--         end
+--       end,
+--       open_mapping = nil,
+--       hide_numbers = true,
+--       shade_terminals = true,
+--       start_in_insert = true,
+--       insert_mappings = true,
+--       terminal_mappings = true,
+--       persist_size = true,
+--       close_on_exit = true,
+--       shell = vim.o.shell,
+--       auto_scroll = true,
+--       highlights = {
+--         NormalFloat = { link = "Normal" },
+--         FloatBorder = { link = "FloatBorder" },
+--       },
+--       float_opts = {
+--         border = "curved",
+--         winblend = 0,
+--         width = function()
+--           return math.min(140, math.floor(vim.o.columns * 0.9))
+--         end,
+--         height = function()
+--           return math.floor(vim.o.lines * 0.9)
+--         end,
+--       },
+--     },
+--     config = function(_, opts)
+--       require("toggleterm").setup(opts)
+--       local Terminal = require("toggleterm.terminal").Terminal
+
+--       local float_term = Terminal:new({ direction = "float", hidden = true })
+--       local horiz_term = Terminal:new({ direction = "horizontal", hidden = true })
+--       local vert_term = Terminal:new({ direction = "vertical", hidden = true })
+--       local gitui_term = Terminal:new({ cmd = "gitui", dir = "git_dir", direction = "float", hidden = true })
+
+--       local function float_toggle()
+--         float_term:toggle()
+--       end
+
+--       local function horiz_toggle()
+--         horiz_term:toggle()
+--       end
+
+--       local function vert_toggle()
+--         vert_term:toggle()
+--       end
+
+--       local function gitui_toggle()
+--         gitui_term:toggle()
+--       end
+
+--       local function run_current_file()
+--         local file = vim.fn.expand("%:p")
+--         local cmd
+--         if vim.bo.ft == "python" then
+--           cmd = "python " .. file
+--         elseif vim.bo.ft == "javascript" or vim.bo.ft == "typescript" then
+--           cmd = "node " .. file
+--         elseif vim.bo.ft == "go" then
+--           cmd = "go run " .. file
+--         elseif vim.bo.ft == "rust" then
+--           cmd = "cargo run"
+--         else
+--           vim.notify("No runner for " .. vim.bo.ft, vim.log.levels.WARN)
+--           return
+--         end
+
+--         Terminal:new({ cmd = cmd, direction = "horizontal", close_on_exit = false }):toggle()
+--       end
+
+--       for _, key in ipairs({ [[<C-/>]], [[<C-_>]] }) do
+--         vim.keymap.set({ "n", "t" }, key, float_toggle, { desc = "Toggle Float Terminal" })
+--       end
+--       vim.keymap.set("n", "<leader>th", horiz_toggle, { desc = "Horizontal Terminal" })
+--       vim.keymap.set("n", "<leader>tv", vert_toggle, { desc = "Vertical Terminal" })
+--       vim.keymap.set("n", "<leader>gg", gitui_toggle, { desc = "GitUI (float)" })
+--       vim.keymap.set("n", "<leader>tr", run_current_file, { desc = "Run Current File" })
+
+--       for i = 1, 9 do
+--         vim.keymap.set({ "n", "t" }, "<leader>t" .. i, function()
+--           Terminal:new({ count = i, direction = "horizontal" }):toggle()
+--         end, { desc = "Terminal #" .. i })
+--       end
+--     end,
+--   },
+-- }

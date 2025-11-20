@@ -1,0 +1,13 @@
+return {
+  {
+    "coder/claudecode.nvim",
+    dependencies = { "folke/snacks.nvim" },
+    config = true,
+    opts = {
+      terminal_cmd = "/home/liqingshan/.local/bin/claude", -- Custom terminal command (default: "claude")
+      terminal = {
+        provider = "auto"
+      }
+    },
+  }
+}
