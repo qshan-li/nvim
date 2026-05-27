@@ -98,7 +98,7 @@ function M.lsp(buf)
 		-- LSP-related keymaps, ONLY effective in buffers with LSP(s) attached
 		["n|<leader>li"] = map_cr("LspInfo"):with_silent():with_buffer(buf):with_desc("lsp: Info"),
 		["n|<leader>lr"] = map_cr("LspRestart"):with_silent():with_buffer(buf):with_nowait():with_desc("lsp: Restart"),
-		["n|go"] = map_cr("Trouble symbols toggle win.position=right")
+		["n|<leader>o"] = map_cr("Trouble symbols toggle win.position=left")
 			:with_silent()
 			:with_buffer(buf)
 			:with_desc("lsp: Toggle outline"),
@@ -108,36 +108,40 @@ function M.lsp(buf)
 			:with_silent()
 			:with_buffer(buf)
 			:with_desc("lsp: Toggle outline in Picker"),
-		["n|<leader>dk"] = map_cr("Lspsaga diagnostic_jump_prev")
+		["n|<leader>dk"] = map_callback(function()
+				vim.diagnostic.goto_prev()
+			end)
 			:with_silent()
 			:with_buffer(buf)
 			:with_desc("lsp: Prev diagnostic"),
-		["n|<leader>dj"] = map_cr("Lspsaga diagnostic_jump_next")
+		["n|<leader>dj"] = map_callback(function()
+				vim.diagnostic.goto_next()
+			end)
 			:with_silent()
 			:with_buffer(buf)
 			:with_desc("lsp: Next diagnostic"),
-		["n|<leader>lx"] = map_cr("Lspsaga show_line_diagnostics ++unfocus")
-			:with_silent()
-			:with_buffer(buf)
-			:with_desc("lsp: Line diagnostic"),
 		["n|gs"] = map_callback(function()
 			vim.lsp.buf.signature_help()
 		end):with_desc("lsp: Signature help"),
-		["n|gr"] = map_cr("Lspsaga rename")
+		["n|gr"] = map_cr("IncRename")
 			:with_silent()
 			:with_nowait()
 			:with_buffer(buf)
 			:with_desc("lsp: Rename in file range"),
-		["n|gR"] = map_cr("Lspsaga rename ++project")
-			:with_silent()
-			:with_buffer(buf)
-			:with_desc("lsp: Rename in project range"),
+		["n|gR"] = map_cr("IncRename"):with_silent():with_buffer(buf):with_desc("lsp: Rename in project range"),
 		["n|K"] = map_callback(silent_hover):with_silent():with_buffer(buf):with_desc("lsp: Show doc"),
-		["nv|<A-f12>/"] = map_cr("Lspsaga code_action")
+		["nv|<A-f12>/"] = map_callback(function()
+				require("tiny-code-action").code_action()
+			end)
 			:with_silent()
 			:with_buffer(buf)
 			:with_desc("lsp: Code action for cursor"),
-		["n|gd"] = map_cr("Lspsaga goto_definition"):with_silent():with_buffer(buf):with_desc("lsp: Goto definition"),
+		["n|gd"] = map_callback(function()
+				vim.lsp.buf.definition()
+			end)
+			:with_silent()
+			:with_buffer(buf)
+			:with_desc("lsp: Goto definition"),
 		["n|gD"] = map_cr("Glance definitions"):with_silent():with_buffer(buf):with_desc("lsp: Preview definition"),
 		["n|gh"] = map_callback(function()
 				local pos = vim.api.nvim_win_get_cursor(0)
@@ -170,20 +174,20 @@ function M.lsp(buf)
 			end)
 			:with_buffer(buf)
 			:with_desc("lsp: Go to references"),
-		["n|<leader>rn"] = map_callback(function()
-				vim.lsp.buf.rename()
-			end)
-			:with_buffer(buf)
-			:with_desc("lsp: Rename symbol"),
+		["n|<leader>rn"] = map_cr("IncRename"):with_buffer(buf):with_desc("lsp: Rename symbol"),
 		["n|gm"] = map_cr("Glance implementations")
 			:with_silent()
 			:with_buffer(buf)
 			:with_desc("lsp: Show implementation"),
-		["n|gci"] = map_cr("Lspsaga incoming_calls")
+		["n|gci"] = map_callback(function()
+				vim.lsp.buf.incoming_calls()
+			end)
 			:with_silent()
 			:with_buffer(buf)
 			:with_desc("lsp: Show incoming calls"),
-		["n|gco"] = map_cr("Lspsaga outgoing_calls")
+		["n|gco"] = map_callback(function()
+				vim.lsp.buf.outgoing_calls()
+			end)
 			:with_silent()
 			:with_buffer(buf)
 			:with_desc("lsp: Show outgoing calls"),

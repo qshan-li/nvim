@@ -10,11 +10,15 @@ completion["neovim/nvim-lspconfig"] = {
 		{ "folke/neoconf.nvim" },
 	},
 }
-completion["nvimdev/lspsaga.nvim"] = {
+completion["rachartier/tiny-code-action.nvim"] = {
 	lazy = true,
 	event = "LspAttach",
-	config = require("completion.lspsaga"),
-	dependencies = "nvim-tree/nvim-web-devicons",
+	config = require("completion.tiny-code-action"),
+}
+completion["smjonas/inc-rename.nvim"] = {
+	lazy = true,
+	event = "LspAttach",
+	config = require("completion.inc-rename"),
 }
 completion["DNLHC/glance.nvim"] = {
 	lazy = true,

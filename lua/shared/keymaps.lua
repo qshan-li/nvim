@@ -85,10 +85,13 @@ function M.setup()
 	end, { desc = i18n.t("toggle_language") })
 
 	local function copy_to_clipboard(text, description)
-		vim.fn.setreg("+", text)
-		vim.fn.setreg("*", text)
+		-- pcall: WSL clipboard provider can be intermittently unavailable
+		local clipboard_ok = pcall(function()
+			vim.fn.setreg("+", text)
+			vim.fn.setreg("*", text)
+		end)
 		vim.fn.setreg('"', text)
-		if vim.fn.has("win32") == 1 or vim.fn.has("wsl") == 1 then
+		if not clipboard_ok and (vim.fn.has("win32") == 1 or vim.fn.has("wsl") == 1) then
 			local osc52 = "\027]52;c;" .. vim.fn.system("base64 -w0", text):gsub("\n", "") .. "\027\\"
 			io.stdout:write(osc52)
 			io.stdout:flush()

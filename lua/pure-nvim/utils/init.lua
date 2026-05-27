@@ -234,7 +234,7 @@ function M.get_palette(overwrite)
 	end
 end
 
--- Generate highlight groups for lspsaga. Existing attributes will NOT be overwritten
+-- Generate highlight groups for LSP kinds. Existing attributes will NOT be overwritten
 function M.gen_lspkind_hl()
 	local colors = M.get_palette()
 	local dat = {

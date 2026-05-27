@@ -67,6 +67,9 @@ local mappings = {
 		["x|<A-/>"] = map_cmd("<Plug>(comment_toggle_linewise_visual)")
 			:with_silent()
 			:with_desc("edit: Toggle line comment"),
+		["x|<A-F12>/"] = map_cmd("<Plug>(comment_toggle_linewise_visual)")
+			:with_silent()
+			:with_desc("edit: Toggle line comment"),
 
 		-- Builtins: "Suckless" - named after r/suckless
 		["n|Y"] = map_cmd("y$"):with_desc("edit: Yank text to EOL"),
@@ -82,6 +85,9 @@ local mappings = {
 			:with_desc("edit: Clear search highlight"),
 		["n|<leader>o"] = map_cr("setlocal spell! spelllang=en_us"):with_desc("edit: Toggle spell check"),
 		["n|<A-/>"] = map_cmd("<Plug>(comment_toggle_linewise_current)")
+			:with_silent()
+			:with_desc("edit: Toggle line comment"),
+		["n|<A-F12>/"] = map_cmd("<Plug>(comment_toggle_linewise_current)")
 			:with_silent()
 			:with_desc("edit: Toggle line comment"),
 	},

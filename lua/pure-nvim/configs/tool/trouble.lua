@@ -12,6 +12,9 @@ return function()
 		focus = false, -- do not focus the window when opened
 		follow = true,
 		restore = true,
+		win = {
+			size = 50,
+		},
 		icons = {
 			indent = {
 				fold_open = icons.ui.ArrowOpen,
