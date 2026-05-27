@@ -14,6 +14,9 @@ return function()
 		vim.keymap.set("n", "?", api.tree.toggle_help, opts("Help"))
 		vim.keymap.set("n", "gy", function()
 			local node = api.tree.get_node_under_cursor()
+			if not node then
+				return vim.notify("No node under cursor", vim.log.levels.WARN)
+			end
 			vim.fn.setreg("+", node.absolute_path)
 		end, opts("Yank Path"))
 

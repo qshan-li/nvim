@@ -99,6 +99,8 @@ local clipboard_config = function()
 				},
 				cache_enabled = 0,
 			}
+		else
+			vim.notify("No clipboard tool found. Install one of: wl-copy, xclip, xsel", vim.log.levels.WARN)
 		end
 	end
 end
