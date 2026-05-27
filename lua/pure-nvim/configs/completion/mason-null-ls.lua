@@ -1,6 +1,4 @@
-local M = {}
-
-M.setup = function()
+return function()
 	require("pure-nvim.utils").load_plugin("mason-null-ls", {
 		ensure_installed = require("pure-nvim.core.settings").mason_null_ls_sources,
 		automatic_installation = false,
@@ -8,5 +6,3 @@ M.setup = function()
 		handlers = {},
 	})
 end
-
-return M

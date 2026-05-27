@@ -73,7 +73,6 @@ return function()
 				-- set up labels for completion entries
 				vim_item.menu = setmetatable({
 					buffer = "[BUF]",
-					orgmode = "[ORG]",
 					nvim_lsp = "[LSP]",
 					path = "[PATH]",
 					spell = "[SPELL]",
@@ -145,7 +144,6 @@ return function()
 			{ name = "nvim_lsp", max_item_count = 350 },
 			{ name = "path" },
 			{ name = "spell" },
-			{ name = "orgmode" },
 			{
 				name = "buffer",
 				option = {

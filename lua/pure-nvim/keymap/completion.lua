@@ -98,7 +98,7 @@ function M.lsp(buf)
 		-- LSP-related keymaps, ONLY effective in buffers with LSP(s) attached
 		["n|<leader>li"] = map_cr("LspInfo"):with_silent():with_buffer(buf):with_desc("lsp: Info"),
 		["n|<leader>lr"] = map_cr("LspRestart"):with_silent():with_buffer(buf):with_nowait():with_desc("lsp: Restart"),
-		["n|<leader>o"] = map_cr("Trouble symbols toggle win.position=left")
+		["n|<leader>co"] = map_cr("Trouble symbols toggle win.position=left")
 			:with_silent()
 			:with_buffer(buf)
 			:with_desc("lsp: Toggle outline"),
@@ -192,13 +192,25 @@ function M.lsp(buf)
 			:with_buffer(buf)
 			:with_desc("lsp: Show outgoing calls"),
 		["n|<leader>lv"] = map_callback(function()
-				_toggle_diagnostic_virtual_text()
+				require("tiny-inline-diagnostic").toggle()
+				local enabled = require("tiny-inline-diagnostic.diagnostic").user_toggle_state
+				vim.notify(
+					"Inline diagnostics " .. (enabled and "enabled" or "disabled") .. " successfully",
+					vim.log.levels.INFO,
+					{ title = "LSP Diagnostic" }
+				)
 			end)
 			:with_noremap()
 			:with_silent()
 			:with_desc("lsp: Toggle diagnostic virtual text"),
 		["n|<leader>lh"] = map_callback(function()
-				_toggle_inlayhint()
+				local is_enabled = vim.lsp.inlay_hint.is_enabled({ bufnr = 0 })
+				vim.lsp.inlay_hint.enable(not is_enabled)
+				vim.notify(
+					(is_enabled and "Inlay hint disabled successfully" or "Inlay hint enabled successfully"),
+					vim.log.levels.INFO,
+					{ title = "LSP Inlay Hint" }
+				)
 			end)
 			:with_noremap()
 			:with_silent()

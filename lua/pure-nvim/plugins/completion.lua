@@ -43,7 +43,7 @@ completion["joechrisellis/lsp-format-modifications.nvim"] = {
 completion["jay-babu/mason-null-ls.nvim"] = {
 	lazy = true,
 	event = { "BufReadPre", "BufNewFile" },
-	config = require("completion.mason-null-ls").setup,
+	config = require("completion.mason-null-ls"),
 	dependencies = {
 		"mason-org/mason.nvim",
 		"nvimtools/none-ls.nvim",

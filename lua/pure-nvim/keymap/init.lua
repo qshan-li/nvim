@@ -1,4 +1,3 @@
-require("pure-nvim.keymap.helpers")
 local bind = require("pure-nvim.keymap.bind")
 local map_cr = bind.map_cr
 

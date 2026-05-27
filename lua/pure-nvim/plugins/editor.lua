@@ -66,12 +66,10 @@ editor["MagicDuck/grug-far.nvim"] = {
 ----------------------------------------------------------------------
 editor["nvim-treesitter/nvim-treesitter"] = {
 	lazy = false, -- nvim-ts cannot lazy load now
-	branch = "main",
 	config = require("editor.treesitter"),
 	dependencies = {
 		{
 			"nvim-treesitter/nvim-treesitter-textobjects",
-			branch = "main",
 			config = require("editor.ts-textobjects"),
 		},
 		{

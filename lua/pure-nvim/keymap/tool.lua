@@ -3,9 +3,9 @@ local map_cr = bind.map_cr
 local map_cu = bind.map_cu
 local map_cmd = bind.map_cmd
 local map_callback = bind.map_callback
-require("pure-nvim.keymap.helpers")
 
 local Terminal = require("toggleterm.terminal").Terminal
+local _lazygit = nil
 
 local panel_terms = {}
 local panel_term_names = {}
@@ -314,7 +314,19 @@ local mappings = {
 			:with_desc("terminal: Toggle float"),
 		["t|<A-d>"] = map_cmd("<Cmd>ToggleTerm<CR>"):with_noremap():with_silent():with_desc("terminal: Toggle float"),
 		["n|<leader>gg"] = map_callback(function()
-				_toggle_lazygit()
+				if vim.fn.executable("lazygit") == 1 then
+					if not _lazygit then
+						_lazygit = Terminal:new({
+							cmd = "lazygit",
+							direction = "float",
+							close_on_exit = true,
+							hidden = true,
+						})
+					end
+					_lazygit:toggle()
+				else
+					vim.notify("Command [lazygit] not found!", vim.log.levels.ERROR, { title = "toggleterm.nvim" })
+				end
 			end)
 			:with_noremap()
 			:with_silent()

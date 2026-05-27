@@ -78,7 +78,14 @@ local mappings = {
 		["n|N"] = map_cmd("Nzzzv"):with_noremap():with_desc("edit: Prev search result"),
 		["n|J"] = map_cmd("mzJ`z"):with_noremap():with_desc("edit: Join next line"),
 		["n|<Esc>"] = map_callback(function()
-				_flash_esc_or_noh()
+				local flash_active, state = pcall(function()
+					return require("flash.plugins.char").state
+				end)
+				if flash_active and state then
+					state:hide()
+				else
+					pcall(vim.cmd.noh)
+				end
 			end)
 			:with_noremap()
 			:with_silent()
@@ -164,31 +171,45 @@ local mappings = {
 			:with_desc("flash: Toggle Search"),
 
 		["nv|<leader>w"] = map_callback(function()
-				_flash_jump_words()
+				require("flash").jump({
+					search = {
+						mode = function(str)
+							return "\\<" .. str
+						end,
+					},
+				})
 			end)
 			:with_silent()
 			:with_noremap()
 			:with_desc("jump: Goto word"),
 		["nv|<leader>j"] = map_callback(function()
-				_flash_jump_lines()
+				require("flash").jump({
+					search = { mode = "search", max_length = 0 },
+					label = { after = { 0, 0 } },
+					pattern = "^",
+				})
 			end)
 			:with_silent()
 			:with_noremap()
 			:with_desc("jump: Goto line"),
 		["nv|<leader>k"] = map_callback(function()
-				_flash_jump_lines()
+				require("flash").jump({
+					search = { mode = "search", max_length = 0 },
+					label = { after = { 0, 0 } },
+					pattern = "^",
+				})
 			end)
 			:with_silent()
 			:with_noremap()
 			:with_desc("jump: Goto line"),
 		["nv|<leader>c"] = map_callback(function()
-				_flash_jump_chars()
+				require("flash").jump()
 			end)
 			:with_silent()
 			:with_noremap()
 			:with_desc("jump: Goto chars"),
 		["nv|<leader>C"] = map_callback(function()
-				_flash_jump_chars()
+				require("flash").jump()
 			end)
 			:with_silent()
 			:with_noremap()
@@ -221,7 +242,7 @@ local mappings = {
 			:with_desc("editn: search & replace current word (file)"),
 
 		["o|m"] = map_callback(function()
-				_flash_jump_treesitter()
+				require("flash").treesitter()
 			end)
 			:with_silent()
 			:with_noremap()

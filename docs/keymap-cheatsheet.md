@@ -106,7 +106,7 @@ Leader key: `<Space>` (set in `shared/options.lua`)
 | `<leader>dk/dj` | n | Prev/next diagnostic |
 | `<leader>li` | n | LSP info |
 | `<leader>lr` | n | Restart LSP |
-| `<leader>o` | n | Toggle outline |
+| `<leader>co` | n | Toggle outline |
 | `<leader>lv` | n | Toggle diagnostic virtual text |
 | `<leader>lh` | n | Toggle inlay hints |
 
