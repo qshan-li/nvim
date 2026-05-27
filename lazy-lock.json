@@ -36,6 +36,7 @@
   "minintro.nvim": { "branch": "master", "commit": "45d146839bafbc556aec4b0d6af5d501bfa653e8" },
   "neocodeium": { "branch": "main", "commit": "bfe790d78e66adaa95cb50a8c75c64a752336e9c" },
   "neoconf.nvim": { "branch": "main", "commit": "751c246c6c1780b94b063918759f352480e3db21" },
+  "neovim-theme-vitesse": { "branch": "main", "commit": "49118a670afce23e212e628e0c88bb3f0b8cffc5" },
   "none-ls.nvim": { "branch": "main", "commit": "e135361b9c11755ef6c48f54a2c970c509b56239" },
   "nvim-bqf": { "branch": "main", "commit": "c282a62bec6c0621a1ef5132aa3f4c9fc4dcc2c7" },
   "nvim-bufdel": { "branch": "main", "commit": "523d58e94e7212fff3e05c247b962dc8f93bcfde" },

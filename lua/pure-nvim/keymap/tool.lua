@@ -704,6 +704,10 @@ local mappings = {
 					{ name = "rose-pine-main", display = "Rose Pine (Main)" },
 					{ name = "rose-pine-moon", display = "Rose Pine (Moon)" },
 					{ name = "rose-pine-dawn", display = "Rose Pine (Dawn)" },
+					{ name = "vitesse", display = "Vitesse (Auto)" },
+					{ name = "vitesse-dark", display = "Vitesse (Dark)" },
+					{ name = "vitesse-light", display = "Vitesse (Light)" },
+					{ name = "vitesse-black", display = "Vitesse (Black)" },
 				}
 
 				vim.ui.select(themes, {
