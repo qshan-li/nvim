@@ -2,6 +2,32 @@
 
 A custom Neovim configuration that runs in two distinct modes, sharing core settings between them.
 
+## Requirements
+
+- **Neovim** >= 0.10.0
+- **Git** >= 2.30
+- **Nerd Font** (for icons) — recommended: [JetBrainsMono Nerd Font](https://www.nerdfonts.com/)
+- **Node.js** >= 18 (for Mason-installed LSP servers)
+- **External tools** (optional, for full functionality):
+  - [fd](https://github.com/sharkdp/fd) — fast file finder (used by fuzzy finders)
+  - [ripgrep](https://github.com/BurntSushi/ripgrep) — fast grep (used by search plugins)
+  - [lazygit](https://github.com/jesseduffield/lazygit) — terminal UI for git
+  - [stylua](https://github.com/JohnnyMorganz/StyLua) — Lua formatter
+  - [fzf](https://github.com/junegunn/fzf) — fuzzy finder (if using `fzf` search backend)
+
+## Installation
+
+```bash
+# 1. Back up existing config (if any)
+mv ~/.config/nvim ~/.config/nvim.bak
+
+# 2. Clone this repo
+git clone https://github.com/<your-username>/nvim ~/.config/nvim
+
+# 3. Launch Neovim — plugins install automatically via lazy.nvim
+nvim
+```
+
 ## Architecture
 
 **Dual-Mode Design**: The config detects `vim.g.vscode` at startup and loads the appropriate mode:
@@ -59,6 +85,11 @@ lua/
     └── init.lua
 ```
 
+## Documentation
+
+- [Keymap Cheatsheet](docs/keymap-cheatsheet.md) — quick reference for all keybindings
+- [Plugin List](docs/plugins.md) — all plugins and their purposes
+
 ## Build / Lint / Test
 
 - **No build step** — config loads directly.
@@ -73,6 +104,10 @@ lua/
 - Options use `vim.o` or `vim.opt`; keymaps use `vim.keymap.set` with `{ desc = ... }`.
 - Conventional commits preferred (feat:, fix:, refactor:).
 
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
 ## License
 
-MIT
+[MIT](LICENSE)
