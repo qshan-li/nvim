@@ -9,13 +9,9 @@ return function()
 	})
 
 	local function copy_to_clipboard(text, description)
-		vim.fn.setreg("+", text)
-		vim.fn.setreg("*", text)
-		vim.fn.setreg('"', text)
-		if vim.fn.has("win32") == 1 or vim.fn.has("wsl") == 1 then
-			local osc52 = "\027]52;c;" .. vim.fn.system("base64 -w0", text):gsub("\n", "") .. "\027\\"
-			io.stdout:write(osc52)
-			io.stdout:flush()
+		local ok, error_message = require("shared.clipboard").copy(text)
+		if not ok then
+			return vim.notify("Failed to copy: " .. tostring(error_message), vim.log.levels.ERROR)
 		end
 		if description then
 			vim.notify(description, vim.log.levels.INFO)

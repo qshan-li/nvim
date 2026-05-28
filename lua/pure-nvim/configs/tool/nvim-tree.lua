@@ -17,7 +17,10 @@ return function()
 			if not node then
 				return vim.notify("No node under cursor", vim.log.levels.WARN)
 			end
-			vim.fn.setreg("+", node.absolute_path)
+			local ok, error_message = require("shared.clipboard").copy(node.absolute_path)
+			if not ok then
+				return vim.notify("Failed to copy: " .. tostring(error_message), vim.log.levels.ERROR)
+			end
 		end, opts("Yank Path"))
 
 		-- Vim 风格导航（类似 mini.files）
